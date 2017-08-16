@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name = 'CAI',
     packages = ["CAI"],
-    version = '0.1.3',
+    version = '0.1.5',
     description = 'Python implementation of codon adaptation index',
     author = 'Benjamin Lee',
     author_email = 'benjamin_lee@college.harvard.edu',
