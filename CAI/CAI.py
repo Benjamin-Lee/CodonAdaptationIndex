@@ -1,5 +1,5 @@
 from itertools import chain
-from genetic_codes import genetic_codes
+from . import genetic_codes
 from scipy.stats.mstats import gmean
 
 def _synonymous_codons(genetic_code_dict):
