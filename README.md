@@ -1,5 +1,5 @@
 # Python Codon Adaptation Index
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.843855.svg)](https://doi.org/10.5281/zenodo.843855)
 An implementation of Sharp and Li's 1987 formulation of the codon adaption index.
 
 ## Reference
@@ -32,6 +32,9 @@ All functions in CAI support an optional `genetic_code` parameter, which is set 
 
 ## Contributing
 Feel free to contribute, open issues, or let me know about bugs. Anything is welcome!
+
+## Citation 
+Benjamin Lee. (2017). Python Implementation of Codon Adaptation Index. _Zenodo_. http://doi.org/10.5281/zenodo.843855
 
 ## Contact
 I'm available for contact at [benjamin_lee@college.harvard.edu](mailto:benjamin_lee@college.harvard.edu).
