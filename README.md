@@ -1,5 +1,4 @@
 # CAI.py: Python Codon Adaptation Index
-by [Benjamin Lee](mailto:benjamin_lee@college.harvard.edu)
 
 An implementation of Sharp and Li's 1987 formulation of the codon adaption index.
 
@@ -32,3 +31,6 @@ All functions in CAI support an optional `genetic_code` parameter, which is set 
 
 ## Contributing
 Feel free to contribute, open issues, or let me know about bugs. Anything is welcome!
+
+## Contact
+I'm available for contact at [benjamin_lee@college.harvard.edu](mailto:benjamin_lee@college.harvard.edu).
