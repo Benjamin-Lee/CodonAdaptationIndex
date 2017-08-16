@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Python Codon Adaptation Index
-=======
-# CAI.py: Python Codon Adaptation Index
->>>>>>> 4ff618de9bd610dcc95732c2bbf92b646c696ff2
 
 An implementation of Sharp and Li's 1987 formulation of the codon adaption index.
 
@@ -14,20 +10,14 @@ Sharp, P. M., & Li, W. H. (1987). The codon adaptation index--a measure of direc
 	
 ## Usage
 ### Simple Usage
-<<<<<<< HEAD
-The simple
-=======
 The simplest way to calculate the CAI of a sequence is to call `CAI()` with the sequence as the first (required) argument and with the `sequences` argument included. The sequences argument is a list of reference sequences. Determining which sequences to use as the reference set is left to the user.
->>>>>>> 4ff618de9bd610dcc95732c2bbf92b646c696ff2
+
 ```python
 
 from CAI import CAI
 
 print CAI("ATGGATTAC...", sequences=["ATGTTTGCTAAA", "ATGCGATACAGC",...])
 
-<<<<<<< HEAD
-```
-=======
 ```
 ### Advanced Usage
 If you have already computed the weights or RSCU values of the reference set, you can supply `CAI()` with one or the other as arguments. They must be formatted as a dictionary and contain values for every codon.
@@ -45,4 +35,3 @@ Feel free to contribute, open issues, or let me know about bugs. Anything is wel
 
 ## Contact
 I'm available for contact at [benjamin_lee@college.harvard.edu](mailto:benjamin_lee@college.harvard.edu).
->>>>>>> 4ff618de9bd610dcc95732c2bbf92b646c696ff2
