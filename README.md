@@ -1,5 +1,6 @@
 # Python Codon Adaptation Index
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.843854.svg)](https://doi.org/10.5281/zenodo.843854)
+
 An implementation of Sharp and Li's 1987 formulation of the codon adaption index.
 
 ## Reference
