@@ -1,5 +1,5 @@
 # CAI.py: Python Codon Adaptation Index
-## by [Benjamin Lee](mailto:benjamin_lee@college.harvard.edu)
+by [Benjamin Lee](mailto:benjamin_lee@college.harvard.edu)
 
 An implementation of Sharp and Li's 1987 formulation of the codon adaption index.
 
