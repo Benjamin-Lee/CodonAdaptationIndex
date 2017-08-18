@@ -1,5 +1,5 @@
 from itertools import chain
-from . import genetic_codes
+from genetic_codes import genetic_codes
 from scipy.stats.mstats import gmean
 
 def _synonymous_codons(genetic_code_dict):
@@ -31,12 +31,12 @@ def RSCU(sequences, genetic_code=1):
         if len(sequence) % 3 != 0:
             raise ValueError("Input sequence not divisible by three")
         if len(sequence) == 0:
-            raise ValueError("Cannot include empty sequence in input")
+            raise ValueError("Input sequence cannot be empty")
 
     # count the number of each codon in the sequences
     sequences = [[sequence[i:i+3].upper() for i in range(0, len(sequence), 3)] for sequence in sequences]
-    codons = list(chain.from_iterable(sequences))
-    counts = {i: codons.count(i) for i in set(genetic_code.keys())}
+    codons = list(chain.from_iterable(sequences)) # flat list of all codons (to be used for counting)
+    counts = {i: codons.count(i) for i in genetic_code.keys()}
 
     # "if a certain codon is never used in the reference set... assign [it] a value of 0.5" (page 1285)
     for codon in counts:
@@ -103,9 +103,12 @@ def CAI(sequence, weights=[], RSCUs=[], sequences=[], genetic_code=1):
     # determine the synonymous codons in the genetic code
     synonymous_codons = _synonymous_codons(genetic_codes[genetic_code])
 
+    # find codons without synonyms
+    non_synonymous_codons = [codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1]
+
     # create a list of the weights for the sequqence, not counting codons without synonyms (page 1285)
     try:
-        sequence_weights = [weights[codon] for codon in sequence if (len(synonymous_codons[codon]) != 1)]
+        sequence_weights = [weights[codon] for codon in sequence if codon not in non_synonymous_codons]
     except KeyError, e:
         raise KeyError("Bad weights dictionary passed: missing weight for codon " + str(e))
 
