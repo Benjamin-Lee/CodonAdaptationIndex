@@ -67,7 +67,7 @@ Argument  | Details
 sequence | String of DNA sequence to calculate CAI for. Required.
 weights | Dictionary of weight values for each codon. Optional.
 RSCUs | Dictionary of RSCU values for each codon. Optional.
-sequences | List of DNA sequence strings. Required.
+sequences | List of DNA sequence strings. Optional.
 genetic_code | Integer containing the genetic code ID. Optional.
 
 #### Note
