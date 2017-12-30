@@ -94,6 +94,12 @@ def CAI(sequence, weights=[], RSCUs=[], sequences=[], genetic_code=1):
         raise ValueError("Input sequence not divisible by three")
     sequence = [sequence[i:i+3].upper() for i in range(0, len(sequence), 3)]
 
+    # remove last codon if stop codon
+    try:
+        genetic_codes[genetic_code][sequence[-1]]
+    except KeyError:
+        sequence = sequence[:-1]
+
     # generate weights if not given
     if sequences:
         weights = relative_adaptiveness(sequences=sequences, genetic_code=genetic_code)
@@ -106,7 +112,7 @@ def CAI(sequence, weights=[], RSCUs=[], sequences=[], genetic_code=1):
     # find codons without synonyms
     non_synonymous_codons = [codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1]
 
-    # create a list of the weights for the sequqence, not counting codons without synonyms (page 1285)
+    # create a list of the weights for the sequence, not counting codons without synonyms (page 1285)
     try:
         sequence_weights = [weights[codon] for codon in sequence if codon not in non_synonymous_codons]
     except KeyError, e:
