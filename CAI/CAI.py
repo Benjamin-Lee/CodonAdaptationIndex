@@ -51,7 +51,7 @@ def RSCU(sequences, genetic_code=1):
 
     # calculate RSCU values
     for codon in genetic_code.keys():
-        result[codon] = counts[codon] / ((len(synonymous_codons[codon]) ** -1) * (sum([counts[_codon] for _codon in synonymous_codons[codon]])))
+        result[codon] = float(counts[codon]) / ((len(synonymous_codons[codon]) ** -1) * (sum([counts[_codon] for _codon in synonymous_codons[codon]])))
 
     return result
 
@@ -71,7 +71,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=1):
     # calculate the weights
     weights = {}
     for codon in RSCUs:
-        weights[codon] = RSCUs[codon] / max([RSCUs[_codon] for _codon in synonymous_codons[codon]])
+        weights[codon] = float(RSCUs[codon]) / max([RSCUs[_codon] for _codon in synonymous_codons[codon]])
 
     return weights
 
