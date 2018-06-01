@@ -23,7 +23,7 @@ def RSCU(sequences, genetic_code=1):
     for an amino acid' (page 1283)) as a dictionary
     """
 
-    # convert genetic code ID to dictionary 
+    # convert genetic code ID to dictionary
     genetic_code = genetic_codes[genetic_code]
 
     # ensure all input sequences are divisible by three
@@ -45,7 +45,7 @@ def RSCU(sequences, genetic_code=1):
 
     # determine the synonymous codons for the genetic code
     synonymous_codons = _synonymous_codons(genetic_code)
-    
+
     # hold the result as it is being calulated
     result = {}
 
@@ -115,11 +115,11 @@ def CAI(sequence, weights=[], RSCUs=[], sequences=[], genetic_code=1):
     # create a list of the weights for the sequence, not counting codons without synonyms (page 1285)
     try:
         sequence_weights = [weights[codon] for codon in sequence if codon not in non_synonymous_codons]
-    except KeyError, e:
-        raise KeyError("Bad weights dictionary passed: missing weight for codon " + str(e))
+    except KeyError:
+        raise KeyError("Bad weights dictionary passed: missing weight for codon.")
 
     # return the geometric mean of the weights raised to one over the length of the sequence
-    try: 
+    try:
         return gmean(sequence_weights) ** ((len(sequence_weights)) ** -1)
     except ZeroDivisionError:
         raise ValueError("Sequence only contains codons without synonymous codons")
