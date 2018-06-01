@@ -2,8 +2,8 @@ Python Codon Adaptation Index
 =============================
 |DOI|
 
-An implementation of Sharp and Li's 1987 formulation of the codon adaption
-index.
+An implementation of Sharp and Li's 1987 formulation of the `codon adaption
+index <https://en.wikipedia.org/wiki/Codon_Adaptation_Index>`_.
 
 Reference
 ---------
