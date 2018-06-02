@@ -15,11 +15,11 @@ This module is available from PyPi and can be downloaded with the following comm
 Usage
 -----
 
-Simple Usage
+Basic Usage
 ************
 
-The simplest way to calculate the CAI of a sequence is to call `CAI()` with the
-sequence as the first (required) argument and with the `sequences` argument
+The simplest way to calculate the CAI of a sequence is to call :func:`~CAI.CAI with the
+sequence as the first (required) argument and with the ``sequences`` argument
 included. The sequences argument is a list of reference sequences::
 
 	>>> from CAI import CAI
