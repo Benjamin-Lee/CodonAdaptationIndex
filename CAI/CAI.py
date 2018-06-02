@@ -15,12 +15,22 @@ def _synonymous_codons(genetic_code_dict):
     return {codon : codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
 
 
-def RSCU(sequences, genetic_code=1):
-    """
-    Take a list of sequences in a reference set and an optional genetic code ID
-    and returns the RSCU ('the observed frequency of [a] codon divided by the
-    frequency expected under the assumption of equal usage of the synonymous codons
-    for an amino acid' (page 1283)) as a dictionary
+def RSCU(sequences, genetic_code=11):
+    """ Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
+
+    RSCU is 'the observed frequency of [a] codon divided by the frequency
+    expected under the assumption of equal usage of the synonymous codons for an
+    amino acid' (page 1283).
+
+    Args:
+        sequences (list): The reference set of sequences.
+        genetic_code (int, optional): The translation table to use. Defaults to 11, the standard genetic code.
+
+    Returns:
+        dict: The relative synonymous codon usage.
+
+    Raises:
+        ValueError: When an invalid sequence is provided.
     """
 
     # convert genetic code ID to dictionary
@@ -55,7 +65,27 @@ def RSCU(sequences, genetic_code=1):
 
     return result
 
-def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=1):
+def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
+    """Calculates the relative adaptiveness/weight of codons.
+
+    The relative adaptiveness is "the frequency of use of that codon compared to
+    the frequency of the optimal codon for that amino acid" (page 1283).
+
+    Args:
+        sequences (list, optional): The reference set of sequences.
+        RSCUs (dict, optional): The RSCU of the reference set.
+        genentic_code (int, optional): The translation table to use. Defaults to 11, the standard genetic code.
+
+    Note:
+        Either ``sequences`` or ``RSCUs`` is required.
+
+    Returns:
+        dict: A mapping between each codon and its weight/relative adaptiveness.
+
+    Raises:
+        ValueError: When neither ``sequences`` nor ``RSCUs`` is provided.
+        ValueError: See :func:`RSCU` for details.
+    """
 
     # ensure user gave only and only one input
     if sum([bool(sequences), bool(RSCUs)]) != 1:
@@ -75,10 +105,32 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=1):
 
     return weights
 
-def CAI(sequence, weights=[], RSCUs=[], sequences=[], genetic_code=1):
+def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
     """
-    takes a DNA sequence and either the reference sequences, an RSCU dictionary, or
-    a weights dictionary and returns the codon adaption index for the sequence
+    Calculates the codon adaptation index (CAI) of a DNA sequence.
+
+
+    CAI "the geometric mean of the RSCU values... corresponding to each of the
+    codons used in that gene, divided by the maximum possible CAI for a gene of
+    the same amino acid composition" (page 1285).
+
+    Args:
+        sequence (str): The DNA sequence to calculate the CAI for.
+        weights (dict, optional): The relative adaptiveness of the codons in the reference set.
+        RSCUs (dict, optional): The RSCU of the reference set.
+        sequences (list): The reference set of sequences.
+
+    Note:
+        One of ``weights``, ``sequences`` or ``RSCUs`` is required.
+
+    Returns:
+        float: The CAI of the sequence.
+
+    Raises:
+        ValueError: When anything other than one of either reference sequences, or RSCU dictionary, or weights is provided.
+        ValueError: See :func:`relative_adaptiveness` for details.
+        KeyError: When there is a missing weight for a codon.
+        ValueError: When ``sequence`` only contains codons without synonymous codons
     """
 
     # validate user input
@@ -112,7 +164,10 @@ def CAI(sequence, weights=[], RSCUs=[], sequences=[], genetic_code=1):
     # find codons without synonyms
     non_synonymous_codons = [codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1]
 
-    # create a list of the weights for the sequence, not counting codons without synonyms (page 1285)
+    # create a list of the weights for the sequence, not counting codons without
+    # synonyms -> "Also, the number of AUG and UGG codons are
+    # subtracted from L, since the RSCU values for AUG and UGG are both fixed at
+    # 1.0, and so do not contribute to the CAI." (page 1285)
     try:
         sequence_weights = [weights[codon] for codon in sequence if codon not in non_synonymous_codons]
     except KeyError:
