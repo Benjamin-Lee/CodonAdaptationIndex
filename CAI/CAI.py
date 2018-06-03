@@ -1,6 +1,6 @@
 from itertools import chain
 import Bio.Data.CodonTable as ct
-from .genetic_codes import genetic_codes
+from genetic_codes import genetic_codes
 from scipy.stats.mstats import gmean
 from collections import Counter
 
@@ -104,7 +104,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
     # calculate the weights
     weights = {}
     for codon in RSCUs:
-        weights[codon] = float(RSCUs[codon]) / max([RSCUs[_codon] for _codon in synonymous_codons[codon]])
+        weights[codon] = float(RSCUs[codon]) / max((RSCUs[_codon] for _codon in synonymous_codons[codon]))
 
     return weights
 
