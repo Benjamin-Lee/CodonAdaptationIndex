@@ -3,9 +3,9 @@ import pytest
 
 def test_bad_args():
     # make sure bad arguments raise errors
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         relative_adaptiveness()
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         relative_adaptiveness(sequences=["AAC"], RSCUs=RSCU(["AAC"]))
 
 def test_arg_equivalence():

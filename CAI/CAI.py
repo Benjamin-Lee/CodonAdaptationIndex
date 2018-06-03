@@ -92,7 +92,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
 
     # ensure user gave only and only one input
     if sum([bool(sequences), bool(RSCUs)]) != 1:
-        raise ValueError("Must provide either reference sequences or RSCU dictionary")
+        raise TypeError("Must provide either reference sequences or RSCU dictionary")
 
     # calculate the RSCUs if only given sequences
     if sequences:
@@ -129,15 +129,15 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
         float: The CAI of the sequence.
 
     Raises:
-        ValueError: When anything other than one of either reference sequences, or RSCU dictionary, or weights is provided.
-        ValueError: See :func:`relative_adaptiveness` for details.
+        TypeError: When anything other than one of either reference sequences, or RSCU dictionary, or weights is provided.
+        ValueError: See :func:`RSCU` for details.
         KeyError: When there is a missing weight for a codon.
         ValueError: When ``sequence`` only contains codons without synonymous codons
     """
 
     # validate user input
     if sum([bool(sequences), bool(RSCUs)], bool(weights)) != 1:
-        raise ValueError("Must provide either reference sequences, or RSCU dictionary, or weights")
+        raise TypeError("Must provide either reference sequences, or RSCU dictionary, or weights")
 
     # validate sequence
     if not sequence:
