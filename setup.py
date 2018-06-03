@@ -1,17 +1,27 @@
 from setuptools import setup
+from os import path
+
+# Get the long description from the README file
+here = path.abspath(path.dirname(__file__))
+with open(path.join(here, 'README.rst')) as f:
+    long_description = f.read()
 
 setup(
     name = 'CAI',
     packages = ["CAI"],
     version = '0.1.8',
     description = 'Python implementation of codon adaptation index',
+    long_description=long_description,
     author = 'Benjamin Lee',
     author_email = 'benjamin_lee@college.harvard.edu',
     url = 'https://github.com/Benjamin-Lee/CodonAdaptationIndex', # use the URL to the github repo
     classifiers = ["Intended Audience :: Science/Research",
                    "Topic :: Scientific/Engineering :: Bio-Informatics",
                    "Programming Language :: Python"],
-    install_requires=['scipy'],
+    install_requires=['scipy', 'biopython'],
+    tests_require=["pytest"],
+    setup_requires=['pytest-runner'],
     license="MIT",
-    use_2to3=True
+    use_2to3=True,
+    python_requires='>=3.0'
 )

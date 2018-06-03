@@ -1,12 +1,14 @@
 from itertools import chain
-from genetic_codes import genetic_codes
+import Bio.Data.CodonTable as ct
+from .genetic_codes import genetic_codes
 from scipy.stats.mstats import gmean
+from collections import Counter
 
 def _synonymous_codons(genetic_code_dict):
 
     # invert the genetic code dictionary to map each amino acid to its codons
     codons_for_amino_acid = {}
-    for codon, amino_acid in genetic_code_dict.iteritems():
+    for codon, amino_acid in genetic_code_dict.items():
         codons_for_amino_acid[amino_acid] = codons_for_amino_acid.get(amino_acid, [])
         codons_for_amino_acid[amino_acid].append(codon)
 
@@ -16,7 +18,7 @@ def _synonymous_codons(genetic_code_dict):
 
 
 def RSCU(sequences, genetic_code=11):
-    """ Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
+    """Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
 
     RSCU is 'the observed frequency of [a] codon divided by the frequency
     expected under the assumption of equal usage of the synonymous codons for an
@@ -34,7 +36,7 @@ def RSCU(sequences, genetic_code=11):
     """
 
     # convert genetic code ID to dictionary
-    genetic_code = genetic_codes[genetic_code]
+    genetic_code = ct.unambiguous_dna_by_id[genetic_code].forward_table
 
     # ensure all input sequences are divisible by three
     for sequence in sequences:
@@ -44,11 +46,12 @@ def RSCU(sequences, genetic_code=11):
             raise ValueError("Input sequence cannot be empty")
 
     # count the number of each codon in the sequences
-    sequences = [[sequence[i:i+3].upper() for i in range(0, len(sequence), 3)] for sequence in sequences]
-    codons = list(chain.from_iterable(sequences)) # flat list of all codons (to be used for counting)
-    counts = {i: codons.count(i) for i in genetic_code.keys()}
+    sequences = ((sequence[i:i+3].upper() for i in range(0, len(sequence), 3)) for sequence in sequences)
+    codons = chain.from_iterable(sequences) # flat list of all codons (to be used for counting)
+    counts = Counter(codons)
 
-    # "if a certain codon is never used in the reference set... assign [it] a value of 0.5" (page 1285)
+    # "if a certain codon is never used in the reference set... assign [its
+    # count] a value of 0.5" (page 1285)
     for codon in counts:
         if counts[codon] == 0:
             counts[codon] = 0.5
@@ -106,8 +109,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
     return weights
 
 def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
-    """
-    Calculates the codon adaptation index (CAI) of a DNA sequence.
+    """Calculates the codon adaptation index (CAI) of a DNA sequence.
 
 
     CAI "the geometric mean of the RSCU values... corresponding to each of the

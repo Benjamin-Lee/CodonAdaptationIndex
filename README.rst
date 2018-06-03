@@ -1,6 +1,6 @@
 Python Codon Adaptation Index
 =============================
-|DOI| |Docs|
+|DOI| |Docs| |Travis|
 
 An implementation of Sharp and Li's 1987 formulation of the `codon adaption
 index <https://en.wikipedia.org/wiki/Codon_Adaptation_Index>`_.
@@ -84,3 +84,6 @@ directional synonymous codon usage bias, and its potential applications.
 .. |Docs| image:: https://readthedocs.org/projects/cai/badge/?version=latest
 	:target: https://cai.readthedocs.io/en/latest/?badge=latest
 	:alt: Documentation Status
+
+.. |Travis| image:: https://travis-ci.org/Benjamin-Lee/CodonAdaptationIndex.svg?branch=master
+	:target: https://travis-ci.org/Benjamin-Lee/CodonAdaptationIndex
