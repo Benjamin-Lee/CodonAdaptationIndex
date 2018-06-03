@@ -52,7 +52,7 @@ def RSCU(sequences, genetic_code=11):
 
     # "if a certain codon is never used in the reference set... assign [its
     # count] a value of 0.5" (page 1285)
-    for codon in counts:
+    for codon in genetic_code:
         if counts[codon] == 0:
             counts[codon] = 0.5
 
@@ -64,7 +64,7 @@ def RSCU(sequences, genetic_code=11):
 
     # calculate RSCU values
     for codon in genetic_code.keys():
-        result[codon] = float(counts[codon]) / ((len(synonymous_codons[codon]) ** -1) * (sum([counts[_codon] for _codon in synonymous_codons[codon]])))
+        result[codon] = counts[codon] / ((len(synonymous_codons[codon]) ** -1) * (sum((counts[_codon] for _codon in synonymous_codons[codon]))))
 
     return result
 
