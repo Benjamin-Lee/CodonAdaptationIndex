@@ -3,7 +3,7 @@ import pytest
 
 def test_sum():
     # The sum of the RSCUs should be equal to the number of codons
-    assert sum(RSCU(["AAC"]).values()) == len(RSCU(["AAC"]))
+    assert abs(sum(RSCU(["AAC"]).values()) - len(RSCU(["AAC"]))) < 0.0001
 
 def test_rscu():
     assert RSCU(["AAC"]) == {'AAA': 1.0,

@@ -18,7 +18,7 @@ Usage
 Basic Usage
 ************
 
-The simplest way to calculate the CAI of a sequence is to call :func:`~CAI.CAI with the
+The simplest way to calculate the CAI of a sequence is to call :func:`~CAI.CAI` with the
 sequence as the first (required) argument and with the ``sequences`` argument
 included. The sequences argument is a list of reference sequences::
 
