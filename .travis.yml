@@ -3,9 +3,8 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-before_install:
-    - pip install pytest pytest-cov
-    - pip install coveralls
 install:
     - pip install -e .
+script:
+    - pytest
 cache: pip
