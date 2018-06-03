@@ -99,7 +99,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
         RSCUs = RSCU(sequences, genetic_code=genetic_code)
 
     # determine the synonymous codons for the genetic code
-    synonymous_codons = _synonymous_codons(genetic_codes[genetic_code])
+    synonymous_codons = _synonymous_codons(ct.unambiguous_dna_by_id[genetic_code].forward_table)
 
     # calculate the weights
     weights = {}
@@ -112,7 +112,7 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
     """Calculates the codon adaptation index (CAI) of a DNA sequence.
 
 
-    CAI "the geometric mean of the RSCU values... corresponding to each of the
+    CAI is "the geometric mean of the RSCU values... corresponding to each of the
     codons used in that gene, divided by the maximum possible CAI for a gene of
     the same amino acid composition" (page 1285).
 
@@ -177,6 +177,6 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
 
     # return the geometric mean of the weights raised to one over the length of the sequence
     try:
-        return gmean(sequence_weights) ** ((len(sequence_weights)) ** -1)
+        return float(gmean(sequence_weights) ** ((len(sequence_weights)) ** -1))
     except ZeroDivisionError:
         raise ValueError("Sequence only contains codons without synonymous codons")
