@@ -9,6 +9,3 @@ before_install:
 install:
     - pip install -e .
 cache: pip
-script:
-    - py.test
-after_success: coveralls
