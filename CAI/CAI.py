@@ -35,6 +35,9 @@ def RSCU(sequences, genetic_code=11):
         ValueError: When an invalid sequence is provided.
     """
 
+    # convert genetic code ID to dictionary
+    genetic_code = ct.unambiguous_dna_by_id[genetic_code].forward_table
+
     # ensure all input sequences are divisible by three
     for sequence in sequences:
         if len(sequence) % 3 != 0:
@@ -54,7 +57,7 @@ def RSCU(sequences, genetic_code=11):
             counts[codon] = 0.5
 
     # determine the synonymous codons for the genetic code
-    synonymous_codons = _synonymous_codons(ct.unambiguous_dna_by_id[genetic_code].forward_table)
+    synonymous_codons = _synonymous_codons(genetic_code)
 
     # hold the result as it is being calulated
     result = {}
@@ -96,7 +99,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
         RSCUs = RSCU(sequences, genetic_code=genetic_code)
 
     # determine the synonymous codons for the genetic code
-    synonymous_codons = _synonymous_codons(ct.unambiguous_dna_by_id[genetic_code].forward_table)
+    synonymous_codons = _synonymous_codons(genetic_codes[genetic_code])
 
     # calculate the weights
     weights = {}

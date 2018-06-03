@@ -4,6 +4,7 @@ import pytest
 def test_sum():
     # The sum of the RSCUs should be equal to the number of codons
     assert abs(sum(RSCU(["AAC"]).values()) - len(RSCU(["AAC"]))) < 0.0001
+    assert abs(sum(RSCU(["AACGATACGGCACGT"]).values()) - len(RSCU(["AAC"]))) < 0.0001
 
 def test_rscu():
     assert RSCU(["AAC"]) == {'AAA': 1.0,
@@ -77,10 +78,12 @@ def test_seq():
     # make sure module works on Bio.Seq objects
     from Bio.Seq import Seq
     assert RSCU([Seq("AGC")]) == RSCU(["AGC"])
+    assert RSCU([Seq("AACGATACGGCACGT")]) == RSCU(["AACGATACGGCACGT"])
 
 def test_multiple_seqs():
     # multiple sequences should be identical to their concatenation
     assert RSCU(["AAC", "ATC"]) == RSCU(["AACATC"])
+    assert RSCU(["AAC", "ATC", "AACGATACGGCACGT"]) == RSCU(["AACATCAACGATACGGCACGT"])
 
 def test_stop_codon():
     # stop codons should be equivalent to an empty string since they don't have RSCUs
