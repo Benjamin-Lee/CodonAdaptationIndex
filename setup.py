@@ -23,5 +23,5 @@ setup(
     setup_requires=['pytest-runner'],
     license="MIT",
     use_2to3=True,
-    python_requires='>=3.0'
+    python_requires='>=3.4'
 )
