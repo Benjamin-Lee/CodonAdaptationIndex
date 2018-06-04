@@ -1,6 +1,5 @@
 from itertools import chain
 import Bio.Data.CodonTable as ct
-from genetic_codes import genetic_codes
 from scipy.stats.mstats import gmean
 from collections import Counter
 
@@ -132,7 +131,9 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
         TypeError: When anything other than one of either reference sequences, or RSCU dictionary, or weights is provided.
         ValueError: See :func:`RSCU` for details.
         KeyError: When there is a missing weight for a codon.
-        ValueError: When ``sequence`` only contains codons without synonymous codons
+
+    Warning:
+        Will return nan if the sequence only has codons without synonyms.
     """
 
     # validate user input
@@ -148,11 +149,8 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
         raise ValueError("Input sequence not divisible by three")
     sequence = [sequence[i:i+3].upper() for i in range(0, len(sequence), 3)]
 
-    # remove last codon if stop codon
-    try:
-        genetic_codes[genetic_code][sequence[-1]]
-    except KeyError:
-        sequence = sequence[:-1]
+    # remove stop codons
+    sequence = [codon for codon in sequence if codon not in ct.unambiguous_dna_by_id[genetic_code].stop_codons]
 
     # generate weights if not given
     if sequences:
@@ -161,10 +159,10 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
         weights = relative_adaptiveness(RSCUs=RSCUs, genetic_code=genetic_code)
 
     # determine the synonymous codons in the genetic code
-    synonymous_codons = _synonymous_codons(genetic_codes[genetic_code])
+    synonymous_codons =  _synonymous_codons(ct.unambiguous_dna_by_id[genetic_code].forward_table)
 
     # find codons without synonyms
-    non_synonymous_codons = [codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1]
+    non_synonymous_codons = {codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1}
 
     # create a list of the weights for the sequence, not counting codons without
     # synonyms -> "Also, the number of AUG and UGG codons are
@@ -176,7 +174,4 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
         raise KeyError("Bad weights dictionary passed: missing weight for codon.")
 
     # return the geometric mean of the weights raised to one over the length of the sequence
-    try:
-        return float(gmean(sequence_weights) ** ((len(sequence_weights)) ** -1))
-    except ZeroDivisionError:
-        raise ValueError("Sequence only contains codons without synonymous codons")
+    return float(gmean(sequence_weights))
