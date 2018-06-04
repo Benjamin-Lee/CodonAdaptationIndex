@@ -128,8 +128,7 @@ def relative_adaptiveness(sequences=None, RSCUs=None, genetic_code=11):
 
     return weights
 
-def CAI(sequence, weights=None, RSCUs=None, sequences=None, genetic_code=11):
-    """Calculates the codon adaptation index (CAI) of a DNA sequence.
+def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
     r"""Calculates the codon adaptation index (CAI) of a DNA sequence.
 
 
@@ -150,10 +149,10 @@ def CAI(sequence, weights=None, RSCUs=None, sequences=None, genetic_code=11):
         sequence (str): The DNA sequence to calculate the CAI for.
         weights (dict, optional): The relative adaptiveness of the codons in the reference set.
         RSCUs (dict, optional): The RSCU of the reference set.
-        sequences (list): The reference set of sequences.
+        reference (list): The reference set of sequences.
 
     Note:
-        One of ``weights``, ``sequences`` or ``RSCUs`` is required.
+        One of ``weights``, ``reference`` or ``RSCUs`` is required.
 
     Returns:
         float: The CAI of the sequence.
@@ -168,7 +167,7 @@ def CAI(sequence, weights=None, RSCUs=None, sequences=None, genetic_code=11):
     """
 
     # validate user input
-    if sum([bool(sequences), bool(RSCUs)], bool(weights)) != 1:
+    if sum([bool(reference), bool(RSCUs)], bool(weights)) != 1:
         raise TypeError("Must provide either reference sequences, or RSCU dictionary, or weights")
 
     # validate sequence
@@ -184,8 +183,8 @@ def CAI(sequence, weights=None, RSCUs=None, sequences=None, genetic_code=11):
     sequence = [codon for codon in sequence if codon not in ct.unambiguous_dna_by_id[genetic_code].stop_codons]
 
     # generate weights if not given
-    if sequences:
-        weights = relative_adaptiveness(sequences=sequences, genetic_code=genetic_code)
+    if reference:
+        weights = relative_adaptiveness(sequences=reference, genetic_code=genetic_code)
     elif RSCUs:
         weights = relative_adaptiveness(RSCUs=RSCUs, genetic_code=genetic_code)
 
