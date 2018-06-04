@@ -20,6 +20,7 @@ def _synonymous_codons(genetic_code_dict):
     # Example: {'CTT': ['CTT', 'CTG', 'CTA', 'CTC', 'TTA', 'TTG'], 'ATG': ['ATG']...}
     return {codon : codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
 _synonymous_codons = {k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()}
+_non_synonymous_codons = {k: {codon for codon in v.keys() if len(v[codon]) == 1} for k, v in _synonymous_codons.items()}
 
 def RSCU(sequences, genetic_code=11):
     r"""Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
@@ -178,10 +179,8 @@ def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
     # make sure input sequence can be divided into codons. If so, split into list of codons
     if len(sequence) % 3 != 0:
         raise ValueError("Input sequence not divisible by three")
-    sequence = [sequence[i:i+3].upper() for i in range(0, len(sequence), 3)]
-
-    # remove stop codons
-    sequence = [codon for codon in sequence if codon not in ct.unambiguous_dna_by_id[genetic_code].stop_codons]
+    sequence = sequence.upper()
+    sequence = [sequence[i:i+3] for i in range(0, len(sequence), 3)]
 
     # generate weights if not given
     if reference:
@@ -189,20 +188,21 @@ def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
     elif RSCUs:
         weights = relative_adaptiveness(RSCUs=RSCUs, genetic_code=genetic_code)
 
-    # determine the synonymous codons in the genetic code
-    synonymous_codons =  _synonymous_codons[genetic_code]
-
-    # find codons without synonyms
-    non_synonymous_codons = {codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1}
-
     # create a list of the weights for the sequence, not counting codons without
     # synonyms -> "Also, the number of AUG and UGG codons are
     # subtracted from L, since the RSCU values for AUG and UGG are both fixed at
     # 1.0, and so do not contribute to the CAI." (page 1285)
-    try:
-        sequence_weights = [weights[codon] for codon in sequence if codon not in non_synonymous_codons]
-    except KeyError:
-        raise KeyError("Bad weights dictionary passed: missing weight for codon.")
+    sequence_weights = []
+    for codon in sequence:
+        if codon not in _non_synonymous_codons[genetic_code]:
+            try:
+                sequence_weights.append(weights[codon])
+            except KeyError:
+                # ignore stop codons
+                if codon in ct.unambiguous_dna_by_id[genetic_code].stop_codons:
+                    pass
+                else:
+                    raise KeyError("Bad weights dictionary passed: missing weight for codon.")
 
     # return the geometric mean of the weights raised to one over the length of the sequence
     return float(gmean(sequence_weights))
