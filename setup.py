@@ -18,10 +18,11 @@ setup(
     classifiers = ["Intended Audience :: Science/Research",
                    "Topic :: Scientific/Engineering :: Bio-Informatics",
                    "Programming Language :: Python"],
-    install_requires=['scipy', 'biopython'],
+    install_requires=['scipy', 'biopython', 'click'],
     tests_require=["pytest"],
     setup_requires=['pytest-runner'],
     license="MIT",
     use_2to3=True,
-    python_requires='>=3.4'
+    python_requires='>=3.4',
+    entry_points={'console_scripts': ['CAI=CAI.cli:cli']},
 )
