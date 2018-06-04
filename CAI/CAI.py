@@ -16,7 +16,7 @@ def _synonymous_codons(genetic_code_dict):
         codons_for_amino_acid[amino_acid] = codons_for_amino_acid.get(amino_acid, [])
         codons_for_amino_acid[amino_acid].append(codon)
 
-    # create dictionary of synonmyous codons
+    # create dictionary of synonymous codons
     # Example: {'CTT': ['CTT', 'CTG', 'CTA', 'CTC', 'TTA', 'TTG'], 'ATG': ['ATG']...}
     return {codon : codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
 _synonymous_codons = {k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()}

@@ -2,8 +2,10 @@ Python Codon Adaptation Index
 =============================
 |DOI| |Docs| |Travis| |CodeFactor|
 
-An implementation of Sharp and Li's 1987 formulation of the `codon adaption
-index <https://en.wikipedia.org/wiki/Codon_Adaptation_Index>`_.
+An implementation of `Sharp and Li's 1987
+formulation<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC340524/pdf/nar00247-0410.pdf>`_
+of the `codon adaption index
+<https://en.wikipedia.org/wiki/Codon_Adaptation_Index>`_.
 
 Installation
 ------------
@@ -31,7 +33,7 @@ Finding the CAI of a sequence is easy::
 
 Similarly, from the command line::
 
-	$ CAI sequence.fasta reference_sequences.fasta
+	$ CAI -s sequence.fasta -r reference_sequences.fasta
 	0.24948128951724224
 
 Determining which sequences to use as the reference set is left to the user,

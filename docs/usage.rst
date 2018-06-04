@@ -54,5 +54,5 @@ by default to 11 (the standard genetic code).
 
 In the CLI, there is an optional "-g" parameter that changes the genetic code::
 
-	$ CAI sequence.fasta reference_sequences.fasta -g 22
+	$ CAI -s sequence.fasta -r reference_sequences.fasta -g 22
 	0.25135779681923687
