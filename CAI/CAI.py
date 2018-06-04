@@ -3,6 +3,7 @@ import Bio.Data.CodonTable as ct
 from scipy.stats.mstats import gmean
 from collections import Counter
 
+# get rid of Biopython warning
 import warnings
 from Bio import BiopythonWarning
 warnings.simplefilter('ignore', BiopythonWarning)

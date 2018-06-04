@@ -12,6 +12,12 @@ This module is available from PyPi and can be downloaded with the following comm
 
 	$ pip install CAI
 
+To install the latest development version::
+
+	$ git clone https://github.com/Benjamin-Lee/CodonAdaptationIndex.git
+	$ cd CodonAdaptationIndex/
+	$ pip install -e .
+
 .. _quickstart:
 
 Quickstart
