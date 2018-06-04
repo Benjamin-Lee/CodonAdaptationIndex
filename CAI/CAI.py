@@ -21,11 +21,21 @@ def _synonymous_codons(genetic_code_dict):
 _synonymous_codons = {k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()}
 
 def RSCU(sequences, genetic_code=11):
-    """Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
+    r"""Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
 
     RSCU is 'the observed frequency of [a] codon divided by the frequency
     expected under the assumption of equal usage of the synonymous codons for an
     amino acid' (page 1283).
+
+    In math terms, it is
+
+    .. math::
+
+        \frac{X_{ij}}{\frac{1}{n_i}\sum_{j=1}^{n_i}x_{ij}}
+
+    "where :math:`X` is the number of occurrences of the :math:`j` th codon for
+    the :math:`i` th amino acid, and :math:`n` is the number (from one to six)
+    of alternative codons for the :math:`i` th amino acid" (page 1283).
 
     Args:
         sequences (list): The reference set of sequences.
@@ -69,10 +79,20 @@ def RSCU(sequences, genetic_code=11):
     return result
 
 def relative_adaptiveness(sequences=None, RSCUs=None, genetic_code=11):
-    """Calculates the relative adaptiveness/weight of codons.
+    r"""Calculates the relative adaptiveness/weight of codons.
 
     The relative adaptiveness is "the frequency of use of that codon compared to
     the frequency of the optimal codon for that amino acid" (page 1283).
+
+    In math terms, :math:`w_{ij}`, the weight for the :math:`j` th codon for
+    the :math:`i` th amino acid is
+
+    .. math::
+
+        w_{ij} = \frac{\text{RSCU}_{ij}}{\text{RSCU}_{imax}}
+
+    where ":math:`\text{RSCU}_{imax}` [is] the RSCU... for the frequently used
+    codon for the :math:`i` th amino acid" (page 1283).
 
     Args:
         sequences (list, optional): The reference set of sequences.
@@ -110,11 +130,21 @@ def relative_adaptiveness(sequences=None, RSCUs=None, genetic_code=11):
 
 def CAI(sequence, weights=None, RSCUs=None, sequences=None, genetic_code=11):
     """Calculates the codon adaptation index (CAI) of a DNA sequence.
+    r"""Calculates the codon adaptation index (CAI) of a DNA sequence.
 
 
     CAI is "the geometric mean of the RSCU values... corresponding to each of the
     codons used in that gene, divided by the maximum possible CAI for a gene of
     the same amino acid composition" (page 1285).
+
+    In math terms, it is
+
+    .. math::
+
+        \left(\prod_{k=1}^Lw_k\right)^{\frac{1}{L}}
+
+    where :math:`w_k` is the relative adaptiveness of the :math:`k` th codon in
+    the gene (page 1286).
 
     Args:
         sequence (str): The DNA sequence to calculate the CAI for.
