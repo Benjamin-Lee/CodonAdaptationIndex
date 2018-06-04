@@ -12,46 +12,25 @@ This module is available from PyPi and can be downloaded with the following comm
 
 	$ pip install CAI
 
-Usage
------
+.. _quickstart:
 
-Basic Usage
-************
+Quickstart
+----------
 
-The simplest way to calculate the CAI of a sequence is to call :func:`~CAI.CAI` with the
-sequence as the first (required) argument and with the ``sequences`` argument
-included. The sequences argument is a list of reference sequences::
+Finding the CAI of a sequence is easy::
 
 	>>> from CAI import CAI
-	>>> CAI("ATGGATTAC...", sequences=["ATGTTTGCTAAA", "ATGCGATACAGC",...])
+	>>> CAI("ATG...", reference=["ATGTTT...", "ATGCGC...",...])
+	0.24948128951724224
 
-Determining which sequences to use as the reference set is left to the user.
+Similarly, from the command line::
 
-Advanced Usage
-**************
+	$ CAI sequence.fasta reference_sequences.fasta
+	0.24948128951724224
 
-If you have already computed the weights or RSCU values of the reference set,
-you can supply :func:`~CAI.CAI` with one or the other as arguments. They must be
-formatted as a dictionary and contain values for every codon.
-
-.. note:: If you are computing large numbers of CAIs with the same reference sequences,
-	first calculate their weights and then pass that to :func:`~CAI.CAI` to
-	eliminate redundant computation.
-
-To calculate RSCU without calculating CAI, you can use :func:`~CAI.RSCU`. :func:`~CAI.RSCU`'s only
-required argument is a list of sequences.
-
-Similarly, to calculate the weights of reference sequences, you can use
-:func:`~CAI.relative_adaptiveness`. :func:`~CAI.relative_adaptiveness` takes either a list of
-sequences as the ``sequences`` parameter or a dictionary of RSCUs as the ``RSCUs``
-parameter.
-
-Other Genetic Codes
-*******************
-
-All functions in CAI support an optional ``genetic_code`` parameter, which is set
-by default to 11 (the standard genetic code).
-
+Determining which sequences to use as the reference set is left to the user,
+though the `HEG-DB <http://genomes.urv.cat/HEG-DB/>`_ is a great resource of
+highly expressed genes.
 
 Contributing
 ------------
@@ -64,6 +43,8 @@ Citation
 
 Benjamin Lee. (2017). Python Implementation of Codon Adaptation Index. *Zenodo*.
 `http://doi.org/10.5281/zenodo.843854 <http://doi.org/10.5281/zenodo.843854>`_
+
+JOSS citation coming soon.
 
 Contact
 -------
