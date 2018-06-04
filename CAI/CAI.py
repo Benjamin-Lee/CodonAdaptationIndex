@@ -38,7 +38,7 @@ def RSCU(sequences, genetic_code=11):
     for sequence in sequences:
         if len(sequence) % 3 != 0:
             raise ValueError("Input sequence not divisible by three")
-        if len(sequence) == 0:
+        if not sequence:
             raise ValueError("Input sequence cannot be empty")
 
     # count the number of each codon in the sequences
@@ -64,7 +64,7 @@ def RSCU(sequences, genetic_code=11):
 
     return result
 
-def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
+def relative_adaptiveness(sequences=None, RSCUs=None, genetic_code=11):
     """Calculates the relative adaptiveness/weight of codons.
 
     The relative adaptiveness is "the frequency of use of that codon compared to
@@ -104,7 +104,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
 
     return weights
 
-def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
+def CAI(sequence, weights=None, RSCUs=None, sequences=None, genetic_code=11):
     """Calculates the codon adaptation index (CAI) of a DNA sequence.
 
 
