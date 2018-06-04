@@ -14,7 +14,7 @@ def _synonymous_codons(genetic_code_dict):
     # create dictionary of synonmyous codons
     # Example: {'CTT': ['CTT', 'CTG', 'CTA', 'CTC', 'TTA', 'TTG'], 'ATG': ['ATG']...}
     return {codon : codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
-
+_synonymous_codons = {k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()}
 
 def RSCU(sequences, genetic_code=11):
     """Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
@@ -34,9 +34,6 @@ def RSCU(sequences, genetic_code=11):
         ValueError: When an invalid sequence is provided.
     """
 
-    # convert genetic code ID to dictionary
-    genetic_code = ct.unambiguous_dna_by_id[genetic_code].forward_table
-
     # ensure all input sequences are divisible by three
     for sequence in sequences:
         if len(sequence) % 3 != 0:
@@ -51,18 +48,18 @@ def RSCU(sequences, genetic_code=11):
 
     # "if a certain codon is never used in the reference set... assign [its
     # count] a value of 0.5" (page 1285)
-    for codon in genetic_code:
+    for codon in ct.unambiguous_dna_by_id[genetic_code].forward_table:
         if counts[codon] == 0:
             counts[codon] = 0.5
 
     # determine the synonymous codons for the genetic code
-    synonymous_codons = _synonymous_codons(genetic_code)
+    synonymous_codons = _synonymous_codons[genetic_code]
 
     # hold the result as it is being calulated
     result = {}
 
     # calculate RSCU values
-    for codon in genetic_code.keys():
+    for codon in ct.unambiguous_dna_by_id[genetic_code].forward_table:
         result[codon] = counts[codon] / ((len(synonymous_codons[codon]) ** -1) * (sum((counts[_codon] for _codon in synonymous_codons[codon]))))
 
     return result
@@ -98,7 +95,7 @@ def relative_adaptiveness(sequences=[], RSCUs={}, genetic_code=11):
         RSCUs = RSCU(sequences, genetic_code=genetic_code)
 
     # determine the synonymous codons for the genetic code
-    synonymous_codons = _synonymous_codons(ct.unambiguous_dna_by_id[genetic_code].forward_table)
+    synonymous_codons = _synonymous_codons[genetic_code]
 
     # calculate the weights
     weights = {}
@@ -159,7 +156,7 @@ def CAI(sequence, weights={}, RSCUs={}, sequences=[], genetic_code=11):
         weights = relative_adaptiveness(RSCUs=RSCUs, genetic_code=genetic_code)
 
     # determine the synonymous codons in the genetic code
-    synonymous_codons =  _synonymous_codons(ct.unambiguous_dna_by_id[genetic_code].forward_table)
+    synonymous_codons =  _synonymous_codons[genetic_code]
 
     # find codons without synonyms
     non_synonymous_codons = {codon for codon in synonymous_codons.keys() if len(synonymous_codons[codon]) == 1}
