@@ -3,6 +3,10 @@ import Bio.Data.CodonTable as ct
 from scipy.stats.mstats import gmean
 from collections import Counter
 
+import warnings
+from Bio import BiopythonWarning
+warnings.simplefilter('ignore', BiopythonWarning)
+
 def _synonymous_codons(genetic_code_dict):
 
     # invert the genetic code dictionary to map each amino acid to its codons
