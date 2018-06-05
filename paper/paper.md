@@ -33,9 +33,9 @@ protein folding prediction.[@Rodriguez2017]
 `CAI` is a Python package for the efficient calculation of this metric, along
 with the associated relative synonymous codon usage (RSCU) and relative
 adaptiveness metrics. In addition, `CAI` includes a command line interface for
-the calculation of CAI from FASTA files. For example, to find the
-CAI of the sequence within `sequence.fasta` with respect to the sequences within
-`reference.fasta`, one only need run:
+the calculation of CAI from FASTA files containing DNA sequences.. For example,
+to find the CAI of the sequence within `sequence.fasta` with respect to the
+sequences within `reference.fasta`, one only need run:
 
 ```python
 >>> from CAI import CAI
