@@ -12,6 +12,7 @@ Table of Contents
 
    usage
    api
+   cli
    license
 
 Indices and tables
