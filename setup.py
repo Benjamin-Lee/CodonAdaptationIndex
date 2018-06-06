@@ -9,7 +9,7 @@ with open(path.join(here, 'README.rst')) as f:
 setup(
     name = 'CAI',
     packages = ["CAI"],
-    version = '0.1.8',
+    version = '1.0.0',
     description = 'Python implementation of codon adaptation index',
     long_description=long_description,
     author = 'Benjamin Lee',
