@@ -54,8 +54,9 @@ In comparison to other Python implementations of the CAI metric [@Cock2009],
 `CAI` features a CLI, supports multiple genetic codes, can yield the RSCU of
 reference sets, and correctly handles the case of missing codons in the
 reference set, therefore exhibiting numerical stability. Moreover, on a
-benchmark to determine the CAI of 100 3,000 random base pair genes with respect
-to highly expressed genes in _E. coli_, `CAI` performed 39.6% faster.
+benchmark to determine the CAI of 100 genes consisting of 3,000 random base
+pairs each with respect to highly expressed genes in _E. coli_, `CAI` performed
+39.6% faster.
 
 In conclusion, `CAI` is a significantly faster and more versatile method to
 determine the CAI, RSCU, and relative adaptiveness of DNA sequences.
