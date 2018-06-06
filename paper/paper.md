@@ -9,12 +9,10 @@ tags:
 authors:
   - name: Benjamin Lee
     orcid: 0000-0002-7133-8397
-    affiliation: "1, 2"
+    affiliation: "1"
 affiliations:
  - name: School of Engineering and Applied Sciences, Harvard University
    index: 1
- - name: Lab41, In-Q-Tel
-   index: 2
 date: 4 June 2018
 bibliography: paper.bib
 ---
