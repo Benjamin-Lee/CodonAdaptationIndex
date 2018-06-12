@@ -19,21 +19,21 @@ bibliography: paper.bib
 
 # Summary
 
-Amino acids, the building blocks of proteins, are encoded in DNA by multiple
-synonymous codons, triplets of nucleotides. The synonymous codons for an amino
-acid are not used in equal proportions in coding DNA sequences. Rather, they
-exhibit a bias which varies from organism to organism. The codon adaptation
-index (CAI) is a measurement of this bias with respect to a set of reference
-genes. [@Sharp1987] It has been used in the context of heterologous protein
-expression [@Grote2005], virus attenuation [@Eschke2018], and cotranslational
-protein folding prediction.[@Rodriguez2017]
+Amino acids, the building blocks of proteins, are encoded in DNA by triplets of
+nucleotides called codons. Notably, the synonymous codons for an amino acid are
+not used in equal proportions in coding DNA sequences. Rather, they exhibit a
+bias which varies from organism to organism. The codon adaptation index (CAI) is
+a measurement of this bias with respect to a set of reference genes.
+[@Sharp1987] It has been used in the context of heterologous protein expression
+[@Grote2005], virus attenuation [@Eschke2018], and cotranslational protein
+folding prediction.[@Rodriguez2017]
 
 `CAI` is a Python package for the efficient calculation of this metric, along
 with the associated relative synonymous codon usage (RSCU) and relative
 adaptiveness metrics. In addition, `CAI` includes a command line interface for
 the calculation of CAI from FASTA files containing DNA sequences.. For example,
 to find the CAI of the sequence within `sequence.fasta` with respect to the
-sequences within `reference.fasta`, one only need run:
+sequences within `reference.fasta`, one need only run:
 
 ```python
 >>> from CAI import CAI
