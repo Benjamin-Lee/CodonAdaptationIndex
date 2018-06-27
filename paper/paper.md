@@ -31,7 +31,7 @@ folding prediction.[@Rodriguez2017]
 `CAI` is a Python package for the efficient calculation of this metric, along
 with the associated relative synonymous codon usage (RSCU) and relative
 adaptiveness metrics. In addition, `CAI` includes a command line interface for
-the calculation of CAI from FASTA files containing DNA sequences.. For example,
+the calculation of CAI from FASTA files containing DNA sequences. For example,
 to find the CAI of the sequence within `sequence.fasta` with respect to the
 sequences within `reference.fasta`, one need only run:
 
@@ -53,10 +53,9 @@ $ CAI -s sequence.fasta -r reference.fasta
 In comparison to other Python implementations of the CAI metric [@Cock2009],
 `CAI` features a CLI, supports multiple genetic codes, can yield the RSCU of
 reference sets, and correctly handles the case of missing codons in the
-reference set, therefore exhibiting numerical stability. Moreover, on a
-benchmark to determine the CAI of 100 genes consisting of 3,000 random base
-pairs each with respect to highly expressed genes in _E. coli_, `CAI` performed
-39.6% faster.
+reference set. Moreover, on a benchmark to determine the CAI of 100 genes
+consisting of 3,000 random base pairs each with respect to highly expressed
+genes in _Escherichia coli_, `CAI` performed 39.6% faster.
 
 In conclusion, `CAI` is a significantly faster and more versatile method to
 determine the CAI, RSCU, and relative adaptiveness of DNA sequences.
