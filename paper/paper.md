@@ -26,7 +26,7 @@ bias which varies from organism to organism. The codon adaptation index (CAI) is
 a measurement of this bias with respect to a set of reference genes.
 [@Sharp1987] It has been used in the context of heterologous protein expression
 [@Grote2005], virus attenuation [@Eschke2018], and cotranslational protein
-folding prediction.[@Rodriguez2017]
+folding prediction [@Rodriguez2017].
 
 `CAI` is a Python package for the efficient calculation of this metric, along
 with the associated relative synonymous codon usage (RSCU) and relative
