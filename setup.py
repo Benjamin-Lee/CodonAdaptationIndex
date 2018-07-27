@@ -7,17 +7,17 @@ with open(path.join(here, 'README.rst')) as f:
     long_description = f.read()
 
 setup(
-    name = 'CAI',
-    packages = ["CAI"],
-    version = '1.0.0',
-    description = 'Python implementation of codon adaptation index',
+    name='CAI',
+    packages=["CAI"],
+    version='1.0.1',
+    description='Python implementation of codon adaptation index',
     long_description=long_description,
-    author = 'Benjamin Lee',
-    author_email = 'benjamin_lee@college.harvard.edu',
-    url = 'https://github.com/Benjamin-Lee/CodonAdaptationIndex', # use the URL to the github repo
-    classifiers = ["Intended Audience :: Science/Research",
-                   "Topic :: Scientific/Engineering :: Bio-Informatics",
-                   "Programming Language :: Python"],
+    author='Benjamin Lee',
+    author_email='benjamin_lee@college.harvard.edu',
+    url='https://github.com/Benjamin-Lee/CodonAdaptationIndex', # use the URL to the github repo
+    classifiers=["Intended Audience :: Science/Research",
+                 "Topic :: Scientific/Engineering :: Bio-Informatics",
+                 "Programming Language :: Python"],
     install_requires=['scipy', 'biopython', 'click'],
     tests_require=["pytest"],
     setup_requires=['pytest-runner'],
