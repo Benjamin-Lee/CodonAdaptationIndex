@@ -1,6 +1,6 @@
 Python Codon Adaptation Index
 =============================
-|DOI| |Docs| |Travis| |CodeFactor|
+|DOI| |Docs| |Travis| |CodeFactor| |PyPI|
 
 An implementation of `Sharp and Li's 1987
 formulation <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC340524/pdf/nar00247-0410.pdf>`_
