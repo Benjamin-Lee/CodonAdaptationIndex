@@ -16,9 +16,7 @@ This module is available from PyPi and can be downloaded with the following comm
 
 To install the latest development version::
 
-	$ git clone https://github.com/Benjamin-Lee/CodonAdaptationIndex.git
-	$ cd CodonAdaptationIndex/
-	$ pip install -e .
+	$ pip install git+https://github.com/Benjamin-Lee/CodonAdaptationIndex.git
 
 .. _quickstart:
 

@@ -18,7 +18,9 @@ def _synonymous_codons(genetic_code_dict):
 
     # create dictionary of synonymous codons
     # Example: {'CTT': ['CTT', 'CTG', 'CTA', 'CTC', 'TTA', 'TTG'], 'ATG': ['ATG']...}
-    return {codon : codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
+    return {codon: codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
+
+
 _synonymous_codons = {k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()}
 _non_synonymous_codons = {k: {codon for codon in v.keys() if len(v[codon]) == 1} for k, v in _synonymous_codons.items()}
 
@@ -47,8 +49,11 @@ def RSCU(sequences, genetic_code=11):
         dict: The relative synonymous codon usage.
 
     Raises:
-        ValueError: When an invalid sequence is provided.
+        ValueError: When an invalid sequence is provided or a list is not provided.
     """
+
+    if not isinstance(sequences, (list, tuple)):
+        raise ValueError("Be sure to pass a list of sequences, not a single sequence. To find the RSCU of a single sequence, pass it as a one element list.")
 
     # ensure all input sequences are divisible by three
     for sequence in sequences:
@@ -58,7 +63,7 @@ def RSCU(sequences, genetic_code=11):
             raise ValueError("Input sequence cannot be empty")
 
     # count the number of each codon in the sequences
-    sequences = ((sequence[i:i+3].upper() for i in range(0, len(sequence), 3)) for sequence in sequences)
+    sequences = ((sequence[i:i + 3].upper() for i in range(0, len(sequence), 3)) for sequence in sequences)
     codons = chain.from_iterable(sequences) # flat list of all codons (to be used for counting)
     counts = Counter(codons)
 
@@ -180,7 +185,7 @@ def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
     if len(sequence) % 3 != 0:
         raise ValueError("Input sequence not divisible by three")
     sequence = sequence.upper()
-    sequence = [sequence[i:i+3] for i in range(0, len(sequence), 3)]
+    sequence = [sequence[i:i + 3] for i in range(0, len(sequence), 3)]
 
     # generate weights if not given
     if reference:
