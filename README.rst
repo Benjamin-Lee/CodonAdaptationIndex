@@ -65,8 +65,8 @@ Sharp, P. M., & Li, W. H. (1987). The codon adaptation index--a measure of
 directional synonymous codon usage bias, and its potential applications.
 *Nucleic Acids Research*, 15(3), 1281–1295.
 
-.. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.843854.svg
-	:target: https://doi.org/10.5281/zenodo.843854
+.. |DOI| image:: http://joss.theoj.org/papers/8adf6bd9fd6391d5343d15ea0b6b6525/status.svg
+	:target: http://joss.theoj.org/papers/8adf6bd9fd6391d5343d15ea0b6b6525
 
 .. |Docs| image:: https://readthedocs.org/projects/cai/badge/?version=latest
 	:target: https://cai.readthedocs.io/en/latest/?badge=latest
