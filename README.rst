@@ -77,3 +77,6 @@ directional synonymous codon usage bias, and its potential applications.
 
 .. |CodeFactor| image:: https://www.codefactor.io/repository/github/benjamin-lee/codonadaptationindex/badge/master
 	:target: https://www.codefactor.io/repository/github/benjamin-lee/codonadaptationindex/overview/master
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/CAI.svg
+	:target: https://pypi.org/project/CAI/
