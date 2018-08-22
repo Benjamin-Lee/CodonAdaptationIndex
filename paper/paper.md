@@ -7,7 +7,7 @@ tags:
   - codon adaptation index
   - molecular biology
 authors:
-  - name: Benjamin Lee
+  - name: Benjamin D. Lee
     orcid: 0000-0002-7133-8397
     affiliation: "1"
 affiliations:
