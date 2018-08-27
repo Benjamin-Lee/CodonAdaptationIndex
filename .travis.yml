@@ -8,3 +8,5 @@ install:
 script:
     - pytest
 cache: pip
+after_success:
+    - codecov
