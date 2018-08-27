@@ -5,9 +5,6 @@ python:
   - "3.6"
 install:
     - pip install -e .
-    - pip install codecov pytest-cov
 script:
-    - py.test --cov=.
+    - pytest
 cache: pip
-after_success:
-    - codecov
