@@ -38,11 +38,16 @@ Determining which sequences to use as the reference set is left to the user,
 though the `HEG-DB <http://genomes.urv.cat/HEG-DB/>`_ is a great resource of
 highly expressed genes.
 
-Contributing
-------------
+Contributing and Getting Support
+--------------------------------
 
-Feel free to contribute, open issues, or let me know about bugs. Anything is
-welcome!
+If you encounter any issues using CAI, feel free to `create an issue
+<https://github.com/Benjamin-Lee/CodonAdaptationIndex/issues>`_.
+
+To contribute to the project, please `create a pull request
+<https://github.com/Benjamin-Lee/CodonAdaptationIndex/pulls>`_. For more
+information on how to do so, please look at GitHub's `documentation on pull
+requests <https://help.github.com/articles/about-pull-requests>`_. 
 
 Citation
 --------
