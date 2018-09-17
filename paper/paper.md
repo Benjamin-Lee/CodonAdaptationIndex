@@ -23,7 +23,8 @@ Amino acids, the building blocks of proteins, are encoded in DNA by triplets of
 nucleotides called codons. Notably, the synonymous codons for an amino acid are
 not used in equal proportions in coding DNA sequences. Rather, they exhibit a
 bias which varies from organism to organism. The codon adaptation index (CAI) is
-a measurement of this bias with respect to a set of reference genes [@Sharp1987]. It has been used in the context of heterologous protein expression
+a measurement of this bias with respect to a set of reference genes
+[@Sharp1987]. It has been used in the context of heterologous protein expression
 [@Grote2005], virus attenuation [@Eschke2018], and cotranslational protein
 folding prediction [@Rodriguez2017].
 
@@ -36,6 +37,7 @@ sequences within `reference.fasta`, one need only run:
 
 ```shell
 $ CAI -s sequence.fasta -r reference.fasta
+0.24948128951724224
 ```
 
 Similarly, using the Python API:
