@@ -1,16 +1,27 @@
 Usage
 =====
+
 Basic Usage
 -----------
 
 As covered in :ref:`quickstart`, the basic :func:`~CAI.CAI` function is fast and
-easy. Simply import it and get to your science. Note that it also lays nicely
+easy. Simply import it and get to your science. Note that it also plays nicely
 with `Biopython Seq objects <https://biopython.org/wiki/Seq>`_::
 
     >>> from CAI import CAI
     >>> from Bio.Seq import Seq
     >>> CAI(Seq("AAT"), reference=[Seq("AAC")])
     0.5
+
+The CLI is equally easy to use. For example, to find the CAI of the `native GFP
+gene
+<https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/gfp.fasta>`_
+with respect to the `highly expressed genes in *E. coli*
+<https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/ecol.heg.fasta>`_,
+only one command is required::
+
+    $ CAI -s gfp.fasta -r ecol.heg.fasta
+    0.3753543123685772
 
 Advanced Usage
 --------------
