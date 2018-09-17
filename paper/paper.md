@@ -56,7 +56,8 @@ In comparison to other Python implementations of the CAI metric [@Cock2009],
 reference sets, and correctly handles the case of missing codons in the
 reference set. Moreover, on a benchmark to determine the CAI of 100 genes
 consisting of 3,000 random base pairs each with respect to highly expressed
-genes in _Escherichia coli_, `CAI` performed 39.6% faster.
+genes in _Escherichia coli_, `CAI` performed 39.6% faster than BioPython's
+implementation.
 
 In conclusion, `CAI` is a significantly faster and more versatile method to
 determine the CAI, RSCU, and relative adaptiveness of DNA sequences.
