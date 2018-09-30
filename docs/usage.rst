@@ -16,8 +16,8 @@ with `Biopython Seq objects <https://biopython.org/wiki/Seq>`_::
 The CLI is equally easy to use. For example, to find the CAI of the `native GFP
 gene
 <https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/gfp.fasta>`_
-with respect to the `highly expressed genes in *E. coli*
-<https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/ecol.heg.fasta>`_,
+with respect to the `highly expressed genes
+<https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/ecol.heg.fasta>`_ in *E. coli*,
 only one command is required::
 
     $ CAI -r example_seqs/ecol.heg.fasta -s example_seqs/gfp.fasta
