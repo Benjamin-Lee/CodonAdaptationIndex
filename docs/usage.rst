@@ -27,6 +27,9 @@ only one command is required::
 
    Both ``CAI`` and ``cai`` are valid commands.
 
+More example sequences can be found in the ``example_seqs`` directory on `GitHub
+<https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/>`_. 
+
 Advanced Usage
 --------------
 
