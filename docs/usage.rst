@@ -23,6 +23,10 @@ only one command is required::
     $ CAI -s gfp.fasta -r ecol.heg.fasta
     0.3753543123685772
 
+.. note::
+
+   Both ``CAI`` and ``cai`` are valid commands.
+
 Advanced Usage
 --------------
 
