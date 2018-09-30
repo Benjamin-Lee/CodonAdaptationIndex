@@ -20,7 +20,7 @@ with respect to the `highly expressed genes in *E. coli*
 <https://github.com/Benjamin-Lee/CodonAdaptationIndex/blob/master/example_seqs/ecol.heg.fasta>`_,
 only one command is required::
 
-    $ CAI -s gfp.fasta -r ecol.heg.fasta
+    $ CAI -r example_seqs/ecol.heg.fasta -s example_seqs/gfp.fasta
     0.3753543123685772
 
 .. note::
