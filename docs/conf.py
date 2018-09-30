@@ -88,8 +88,6 @@ html_theme = 'alabaster'
 html_theme_options = {
     "fixed_sidebar": True,
     "sidebar_collapse": False,
-    "github_user": "benjamin-lee",
-    "github_repo": "CodonAdaptationIndex",
     "show_related": True,
 
 }
