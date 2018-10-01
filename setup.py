@@ -9,7 +9,7 @@ with open(path.join(here, 'README.rst')) as f:
 setup(
     name='CAI',
     packages=["CAI"],
-    version='1.0.1',
+    version='1.0.2',
     description='Python implementation of codon adaptation index',
     long_description=long_description,
     author='Benjamin Lee',
@@ -18,7 +18,7 @@ setup(
     classifiers=["Intended Audience :: Science/Research",
                  "Topic :: Scientific/Engineering :: Bio-Informatics",
                  "Programming Language :: Python"],
-    install_requires=['scipy', 'biopython', 'click'],
+    install_requires=['scipy', 'biopython', 'click>=7'],
     tests_require=["pytest"],
     setup_requires=['pytest-runner'],
     license="MIT",
