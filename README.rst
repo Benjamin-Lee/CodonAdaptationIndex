@@ -10,7 +10,7 @@ of the `codon adaption index
 Installation
 ------------
 
-This module is available from PyPi and can be downloaded with the following command::
+This module is available from PyPI and can be downloaded with the following command::
 
 	$ pip install CAI
 
