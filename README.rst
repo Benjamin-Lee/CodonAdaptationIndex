@@ -47,15 +47,30 @@ If you encounter any issues using CAI, feel free to `create an issue
 To contribute to the project, please `create a pull request
 <https://github.com/Benjamin-Lee/CodonAdaptationIndex/pulls>`_. For more
 information on how to do so, please look at GitHub's `documentation on pull
-requests <https://help.github.com/articles/about-pull-requests>`_. 
+requests <https://help.github.com/articles/about-pull-requests>`_.
 
 Citation
 --------
 
-Benjamin Lee. (2017). Python Implementation of Codon Adaptation Index. *Zenodo*.
-`http://doi.org/10.5281/zenodo.843854 <http://doi.org/10.5281/zenodo.843854>`_
+Lee, B. D. (2018). Python Implementation of Codon Adaptation Index. *Journal of
+Open Source Software, 3*(30), 905. `https://doi.org/10.21105/joss.00905
+<https://doi.org/10.21105/joss.00905>`_
 
-JOSS citation coming soon.
+```
+@article{Lee2018,
+  doi = {10.21105/joss.00905},
+  url = {https://doi.org/10.21105/joss.00905},
+  year  = {2018},
+  month = {oct},
+  publisher = {The Open Journal},
+  volume = {3},
+  number = {30},
+  pages = {905},
+  author = {Benjamin D. Lee},
+  title = {Python Implementation of Codon Adaptation Index},
+  journal = {Journal of Open Source Software}
+}
+```
 
 Contact
 -------
