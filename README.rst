@@ -54,23 +54,21 @@ Citation
 
 Lee, B. D. (2018). Python Implementation of Codon Adaptation Index. *Journal of
 Open Source Software, 3*(30), 905. `https://doi.org/10.21105/joss.00905
-<https://doi.org/10.21105/joss.00905>`_
+<https://doi.org/10.21105/joss.00905>`_ ::
 
-```
-@article{Lee2018,
-  doi = {10.21105/joss.00905},
-  url = {https://doi.org/10.21105/joss.00905},
-  year  = {2018},
-  month = {oct},
-  publisher = {The Open Journal},
-  volume = {3},
-  number = {30},
-  pages = {905},
-  author = {Benjamin D. Lee},
-  title = {Python Implementation of Codon Adaptation Index},
-  journal = {Journal of Open Source Software}
-}
-```
+	@article{Lee2018,
+	  doi = {10.21105/joss.00905},
+	  url = {https://doi.org/10.21105/joss.00905},
+	  year  = {2018},
+	  month = {oct},
+	  publisher = {The Open Journal},
+	  volume = {3},
+	  number = {30},
+	  pages = {905},
+	  author = {Benjamin D. Lee},
+	  title = {Python Implementation of Codon Adaptation Index},
+	  journal = {Journal of Open Source Software}
+
 
 Contact
 -------
