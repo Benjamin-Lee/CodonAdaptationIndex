@@ -6,7 +6,9 @@ from collections import Counter
 # get rid of Biopython warning
 import warnings
 from Bio import BiopythonWarning
-warnings.simplefilter('ignore', BiopythonWarning)
+
+warnings.simplefilter("ignore", BiopythonWarning)
+
 
 def _synonymous_codons(genetic_code_dict):
 
@@ -18,11 +20,20 @@ def _synonymous_codons(genetic_code_dict):
 
     # create dictionary of synonymous codons
     # Example: {'CTT': ['CTT', 'CTG', 'CTA', 'CTC', 'TTA', 'TTG'], 'ATG': ['ATG']...}
-    return {codon: codons_for_amino_acid[genetic_code_dict[codon]] for codon in genetic_code_dict.keys()}
+    return {
+        codon: codons_for_amino_acid[genetic_code_dict[codon]]
+        for codon in genetic_code_dict.keys()
+    }
 
 
-_synonymous_codons = {k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()}
-_non_synonymous_codons = {k: {codon for codon in v.keys() if len(v[codon]) == 1} for k, v in _synonymous_codons.items()}
+_synonymous_codons = {
+    k: _synonymous_codons(v.forward_table) for k, v in ct.unambiguous_dna_by_id.items()
+}
+_non_synonymous_codons = {
+    k: {codon for codon in v.keys() if len(v[codon]) == 1}
+    for k, v in _synonymous_codons.items()
+}
+
 
 def RSCU(sequences, genetic_code=11):
     r"""Calculates the relative synonymous codon usage (RSCU) for a set of sequences.
@@ -53,7 +64,10 @@ def RSCU(sequences, genetic_code=11):
     """
 
     if not isinstance(sequences, (list, tuple)):
-        raise ValueError("Be sure to pass a list of sequences, not a single sequence. To find the RSCU of a single sequence, pass it as a one element list.")
+        raise ValueError(
+            "Be sure to pass a list of sequences, not a single sequence. "
+            "To find the RSCU of a single sequence, pass it as a one element list."
+        )
 
     # ensure all input sequences are divisible by three
     for sequence in sequences:
@@ -63,8 +77,13 @@ def RSCU(sequences, genetic_code=11):
             raise ValueError("Input sequence cannot be empty")
 
     # count the number of each codon in the sequences
-    sequences = ((sequence[i:i + 3].upper() for i in range(0, len(sequence), 3)) for sequence in sequences)
-    codons = chain.from_iterable(sequences) # flat list of all codons (to be used for counting)
+    sequences = (
+        (sequence[i : i + 3].upper() for i in range(0, len(sequence), 3))
+        for sequence in sequences
+    )
+    codons = chain.from_iterable(
+        sequences
+    )  # flat list of all codons (to be used for counting)
     counts = Counter(codons)
 
     # "if a certain codon is never used in the reference set... assign [its
@@ -81,9 +100,13 @@ def RSCU(sequences, genetic_code=11):
 
     # calculate RSCU values
     for codon in ct.unambiguous_dna_by_id[genetic_code].forward_table:
-        result[codon] = counts[codon] / ((len(synonymous_codons[codon]) ** -1) * (sum((counts[_codon] for _codon in synonymous_codons[codon]))))
+        result[codon] = counts[codon] / (
+            (len(synonymous_codons[codon]) ** -1)
+            * (sum((counts[_codon] for _codon in synonymous_codons[codon])))
+        )
 
     return result
+
 
 def relative_adaptiveness(sequences=None, RSCUs=None, genetic_code=11):
     r"""Calculates the relative adaptiveness/weight of codons.
@@ -131,9 +154,12 @@ def relative_adaptiveness(sequences=None, RSCUs=None, genetic_code=11):
     # calculate the weights
     weights = {}
     for codon in RSCUs:
-        weights[codon] = RSCUs[codon] / max((RSCUs[_codon] for _codon in synonymous_codons[codon]))
+        weights[codon] = RSCUs[codon] / max(
+            (RSCUs[_codon] for _codon in synonymous_codons[codon])
+        )
 
     return weights
+
 
 def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
     r"""Calculates the codon adaptation index (CAI) of a DNA sequence.
@@ -175,7 +201,9 @@ def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
 
     # validate user input
     if sum([bool(reference), bool(RSCUs)], bool(weights)) != 1:
-        raise TypeError("Must provide either reference sequences, or RSCU dictionary, or weights")
+        raise TypeError(
+            "Must provide either reference sequences, or RSCU dictionary, or weights"
+        )
 
     # validate sequence
     if not sequence:
@@ -185,7 +213,7 @@ def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
     if len(sequence) % 3 != 0:
         raise ValueError("Input sequence not divisible by three")
     sequence = sequence.upper()
-    sequence = [sequence[i:i + 3] for i in range(0, len(sequence), 3)]
+    sequence = [sequence[i : i + 3] for i in range(0, len(sequence), 3)]
 
     # generate weights if not given
     if reference:
@@ -207,7 +235,11 @@ def CAI(sequence, weights=None, RSCUs=None, reference=None, genetic_code=11):
                 if codon in ct.unambiguous_dna_by_id[genetic_code].stop_codons:
                     pass
                 else:
-                    raise KeyError("Bad weights dictionary passed: missing weight for codon.")
+                    raise KeyError(
+                        "Bad weights dictionary passed: missing weight for codon "
+                        + str(codon)
+                        + "."
+                    )
 
     # return the geometric mean of the weights raised to one over the length of the sequence
     return float(gmean(sequence_weights))
