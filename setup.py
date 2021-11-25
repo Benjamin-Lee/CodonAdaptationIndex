@@ -24,7 +24,7 @@ setup(
     tests_require=["pytest"],
     setup_requires=["pytest-runner"],
     license="MIT",
-    use_2to3=True,
+    # use_2to3=True,
     python_requires=">=3.4",
     entry_points={"console_scripts": ["CAI=CAI.cli:cli"]},
 )
