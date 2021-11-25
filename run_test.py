@@ -20,7 +20,7 @@ def main():
 
     args = [
         f"src/{arg}",  # doctestdir
-        "--cov=cai",
+        "--cov=CAI",
         "--cov-append",
         "--cov-report=html",
         "--cov-report=xml",
@@ -38,7 +38,7 @@ def main():
 
     args = [
         f"tests/{arg}",  # test suite
-        "--cov=cai",
+        "--cov=CAI",
         "--cov-append",
         "--cov-report=html",
         "--cov-report=xml",
