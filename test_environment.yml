@@ -1,0 +1,8 @@
+name: test_environment
+channels:
+- conda-forge
+- defaults
+dependencies:
+- scipy
+- biopython
+- click

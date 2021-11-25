@@ -1,0 +1,66 @@
+name: Tests & Coverage
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*.*'
+jobs:
+  build:
+    name: Test (${{ matrix.python-version }}, ${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'macos-latest', 'windows-latest' ]
+        python-version: ["3.9", "3.8", "3.7"]
+        include:
+        - os: ubuntu-latest
+          python-version: 3.7
+        - os: ubuntu-latest
+          python-version: 3.8
+          codecov: true
+        - os: ubuntu-latest
+          python-version: 3.9
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache conda
+        uses: actions/cache@v2
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ matrix.os }}-python-${{ matrix.python-version }}-${{ hashFiles('environment-ci.yml') }}
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          auto-activate-base: false
+          add-pip-as-python-dependency: true
+          activate-environment: test_environment
+          python-version: ${{ matrix.python-version }}
+          environment-file: test_environment.yml
+          use-only-tar-bz2: true
+
+      - name: conda info
+        shell: bash -l {0}
+        run: conda info --all
+
+      - name: conda list
+        shell: bash -l {0}
+        run: conda list
+
+      - name: Install from source
+        shell: bash -l {0}
+        run: pip install --editable . --no-deps
+
+      - name: set PY_IGNORE_IMPORTMISMATCH=1
+        uses: allenevans/set-env@v2.0.0
+        with:
+          PY_IGNORE_IMPORTMISMATCH: '1'
+
+      - name: python run_test.py
+        shell: bash -l {0}
+        run: python run_test.py
