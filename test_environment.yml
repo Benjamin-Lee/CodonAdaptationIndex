@@ -6,3 +6,11 @@ dependencies:
 - scipy
 - biopython
 - click
+
+- pytest
+- pytest-cov
+- pytest-mock
+- pytest-runner
+- pytest-doctestplus
+- coverage
+- nbval
