@@ -1,0 +1,10 @@
+name: build_environment
+channels:
+- conda-forge
+- defaults
+dependencies:
+- python
+- scipy
+- biopython
+- click
+- setuptools_scm
