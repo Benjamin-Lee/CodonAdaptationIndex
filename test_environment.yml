@@ -1,0 +1,16 @@
+name: test_environment
+channels:
+- conda-forge
+- defaults
+dependencies:
+- python
+- scipy
+- biopython
+- click
+
+- pytest
+- pytest-cov
+- pytest-runner
+- pytest-doctestplus
+- coverage
+- nbval
